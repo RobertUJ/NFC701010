@@ -1,0 +1,40 @@
+{% extends 'bases/main_base.html' %}
+{% block title %} 701010 :: CONNECT YOUR BUSINESS {% endblock %}
+
+{% block content %}	
+
+<h2>
+{{infobranch.Title}}
+</h2>
+<p>
+	{{infobranch.Description}}
+</p>
+<div id="logo">
+	<img src="{{ MEDIA_URL }}{{infobranch.Logo}}" alt="">
+</div>
+<div id="social_links">
+	<a href="{{infobranch.facebook}}" title="">Facebook</a>
+	<a href="{{infobranch.gmail}}" title="">Gooble +</a>
+	<a href="{{infobranch.twitter}}" title="">Twitter</a>
+	<a href="{{infobranch.mail}}" title="">Mail</a>
+</div>
+<hr>
+{% autoescape off %}
+    {{infobranch.Video}}
+{% endautoescape %}
+
+<div id="cupon">
+ <img src="{{ MEDIA_URL }}{{infobranch.Coupon}}" alt="">	
+</div>
+
+<hr>
+<ul id="scroller">
+	{% for img in galery %}
+		<li><img src="{{ MEDIA_URL }}{{img.Image}}" width="290" height="200" alt="{{img.Image_Title}}"  ></li>
+	{% empty %}		
+	{% endfor %}
+</ul> 
+
+
+
+{% endblock %}
