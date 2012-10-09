@@ -4,7 +4,7 @@ from django.core.mail import EmailMultiAlternatives # Para enviar HTML
 from django.http import HttpResponseRedirect
 from django.http import Http404
 
-from nfc701010.apps.customers.models import CodeZip,Customer,Branch,Info_branch,PhotoGallery 
+from nfc701010.apps.customers.models import ZipCode,Customer,Branch,PhotoGallery 
 
 
 
@@ -12,12 +12,16 @@ def get_customer(request,customer,zipcode,branch):
 	slug_customer = str(customer)
 	zipcode  = int(zipcode)
 	slug_branch   = str(branch)
-	
+	print (slug_customer)
+	print (zipcode)
+	print (slug_branch)
+
 	mZipCode = get_object_or_404(CodeZip,ZIP=zipcode)
 
 	mcustomer = get_object_or_404(Customer,slug=slug_customer)
-	if mcustomer.zipcode != mZipCode:
-		raise Http404
+
+	# if mcustomer.zipcode != mZipCode:
+	# 	raise Http404
 
 	mBranch = get_object_or_404(Branch,slug=slug_branch)
 	Info_Branch = get_object_or_404(Info_branch,branch=mBranch)
@@ -37,10 +41,23 @@ def get_customer(request,customer,zipcode,branch):
 	return render_to_response('customers/customer.html',ctx,context_instance=RequestContext(request))
 
 
+# def get_all_branchs(request,customer,zipcode):
+# 	slug_customer = str(customer)
+# 	zipcode  = int(zipcode)
+	
+# 	mZipCode = get_object_or_404(CodeZip,ZIP=zipcode)
+# 	mcustomer = get_object_or_404(Customer,slug=slug_customer)
 
-
+# 	ctx = {}
+# 	return render_to_response('customers/allbranchs.html',ctx,context_instance=RequestContext(request))
 	
 
+# def get_all_zipcodes(request,customer):
+# 	slug_customer = str(customer)
+# 	mcustomer = get_object_or_404(Customer,slug=slug_customer)	
+# 	ctx = {}
+# 	return render_to_response('customers/allzipcodes.html',ctx,context_instance=RequestContext(request))
+	
 
 
 

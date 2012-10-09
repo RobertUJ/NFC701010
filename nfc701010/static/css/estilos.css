@@ -1,0 +1,117 @@
+/* @override http://192.168.0.117:8888/static/css/estilos.css */
+
+a.logo {
+	display: inline-block;
+	float: left;
+	background: url(../img/logo.png) no-repeat;
+	width: 282px;
+	height: 84px;
+	margin-top: 46px;
+}
+
+
+
+#header nav {
+	display: inline-block;
+	float: right;
+	background: url(../img/menu-bg.jpg) repeat-x;
+	height: 44px;
+	margin-top: 20px;
+}
+
+a#fb {
+	background: url(../img/icono-fb.png) no-repeat;
+	width: 30px;
+	height: 30px;
+	display: block;
+}
+
+a#fb:hover{
+	background-position: 0 -31px;
+}
+
+#tw {
+	background: url(../img/icono-tw.png) no-repeat;
+	width: 30px;
+	height: 30px;
+	display: block;
+	margin-left: 5px;
+}
+
+#tw:hover{
+	background-position: 0 -31px;
+
+}
+
+div#header-r {
+	display: inline-block;
+	float: right;
+	width: 50%;
+}
+
+body {
+	background: url(../img/top-bg.jpg) no-repeat center top;
+}
+
+div#social {
+	display: block;
+	margin-top: 20px;
+	width: 151px;
+	height: 30px;
+	float: right;
+}
+
+#gplus {
+	background: url(../img/icono-gplus.png) no-repeat;
+	width: 30px;
+	height: 30px;
+	display: block;
+	margin-left: 5px;
+}
+
+#gplus:hover{
+	background-position: 0 -31px;
+
+}
+
+#mail {
+	background: url(../img/icono-mail.png) no-repeat;
+	width: 30px;
+	height: 30px;
+	display: block;
+	margin-left: 5px;
+}
+
+#mail:hover{
+	background-position: 0 -31px;
+
+}
+a.social-iconos {
+	display: inline-block;
+	float: left;
+}
+
+#header nav ul li a {
+	color: #fff;
+	font-size: 22px;
+	font-weight: normal;
+	font-style: normal;
+	line-height: 42px;
+	padding: 22px 15px 10px;
+	background: url(../img/sombra-menu.png) no-repeat right center;
+}
+
+#header nav ul li a.activo {
+	background: url(../img/activo-bg.jpg) repeat-x 0 13px;
+}
+
+#header nav ul li {
+	display: inline-block;
+	list-style-type: none;
+}
+
+#header nav ul {
+	margin: 0;
+	height: 44px;
+}
+

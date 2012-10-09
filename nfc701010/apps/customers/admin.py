@@ -1,18 +1,32 @@
 from django.contrib import admin
 from django.contrib.admin import ModelAdmin
-from nfc701010.apps.customers.models import CodeZip,Customer,Branch,Info_branch,PhotoGallery
+from nfc701010.apps.customers.models import ZipCode,Customer,Branch,PhotoGallery
 
 
-admin.site.register(CodeZip)
+
+
 
 class CustomerAdmin(admin.ModelAdmin):
-	list_display        = ('name','slug')
-	ordering            = ('name')
-	search_fields		= ('name','slug')
+	prepopulated_fields = {"slug": ("name",)}
+	list_display        = ('name','slug',)
+	search_fields		= ('name','slug',)
 
-admin.site.register(Customer)
+class PhotoGalleryAdmin(admin.ModelAdmin):
+	pass
+
+class PhotoGalleryInline(admin.StackedInline):
+	model = PhotoGallery
+	max_num = 50
+	extra = 0
+
+class BranchAdmin(admin.ModelAdmin):
+	inlines = [PhotoGalleryInline,]
+	prepopulated_fields = {"slug": ("name",)}
+	list_display        = ('name','slug','Title',)
+	search_fields		= ('name','slug','Title',)
 
 
-admin.site.register(Branch)
-admin.site.register(Info_branch)
-admin.site.register(PhotoGallery)
+admin.site.register(ZipCode)
+# admin.site.register(PhotoGallery,PhotoGalleryAdmin)
+admin.site.register(Branch,BranchAdmin)
+admin.site.register(Customer,CustomerAdmin)
