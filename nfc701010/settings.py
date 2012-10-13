@@ -123,14 +123,13 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.flatpages',
-
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
-    'nfc701010.apps.customers',    
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
     # My apps
-
+    'nfc701010.apps.customers',  
+    'sorl.thumbnail',
 )
 
 # A sample logging configuration. The only tangible logging

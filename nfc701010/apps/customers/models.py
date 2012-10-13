@@ -1,12 +1,6 @@
 from django.db import models
 from django.template.defaultfilters import slugify
-#from sorl.thumbnail import ImageField
-
-
-class ZipCode(models.Model):
-	zipcode 		= models.PositiveIntegerField(null=False,blank=False,unique=True)
-	def __unicode__(self):
-		return str(self.zipcode)
+from sorl.thumbnail import ImageField
 
 class Customer(models.Model):
 	name 		=  models.CharField(max_length=255,null=False,blank=False,unique=True,verbose_name=u'Client Name')
@@ -18,12 +12,16 @@ class Customer(models.Model):
 		self.slug = slugify(self.name)
 		super(Customer,self).save(*args,**kwargs)
 
+class ZipCode(models.Model):
+	zipcode 		= models.PositiveIntegerField(null=False,blank=False,unique=True)
+	def __unicode__(self):
+		return str(self.zipcode)
+
 class Branch(models.Model):
-	ZipCode 		= models.ForeignKey(ZipCode)
 	Customer 		= models.ForeignKey(Customer)
+	ZipCode 		= models.ForeignKey(ZipCode)
 	name 			= models.CharField(max_length=255,null=False,blank=False,unique=True)
 	slug 			= models.SlugField(max_length=255,null=True,blank=True,unique=True)
-
 	Title 			= models.CharField(max_length=255)
 	Logo  			= models.ImageField(upload_to='branch/logos')
 	Video			= models.TextField(help_text='After making your selection in youtube, copy and paste the embed code of the video selected.')
@@ -34,6 +32,7 @@ class Branch(models.Model):
 	gmail			= models.URLField(max_length=200,verify_exists=True,null=True,blank=True)
 	twitter			= models.URLField(max_length=200,verify_exists=True,null=True,blank=True)
 	mail 			= models.EmailField(max_length=255,null=True,blank=True)
+	featured 		= models.BooleanField(default=False)
 	def __unicode__(self):
 		return str(self.Title)
 	def save(self, *args, **kwargs):
@@ -42,7 +41,7 @@ class Branch(models.Model):
 
 class PhotoGallery(models.Model):
 	Branch 			= models.ForeignKey(Branch)
-	Image_Title	    = models.CharField(max_length=255)
+	Image_Title	    = models.CharField(max_length=255,null=True,blank=True,unique=False)
 	Image 			= models.ImageField(upload_to='branch/galery')
 	def __unicode__(self):
 		return str(self.Image_Title)

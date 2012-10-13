@@ -3,38 +3,64 @@
 
 {% block content %}	
 
+{% load thumbnail %}
+
+
+<div class="container customer">
+	<div class="row">
+		<div class="span4">
+			<div id="logo">
+		{% thumbnail infobranch.Logo "210x155" crop="50% center" as im %}
+            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{infobranch.Title}}">
+        {% empty %}
+        	<img src="{{ MEDIA_URL }}no_logo.jpg" alt="{{b.Title}}">
+        {% endthumbnail %}
+		
+		
+		</div>
+		<div id="social_links">
+			<a href="{{infobranch.facebook}}" id="fb" class="social-iconos" title=""></a>
+			<a href="{{infobranch.gmail}}" id="gplus" class="social-iconos" title=""></a>
+			<a href="{{infobranch.twitter}}" id="tw" class="social-iconos" title=""></a>
+			<a href="{{infobranch.mail}}" id="mail" class="social-iconos" title=""></a>
+		</div>
+	</div>
+	<div class="span8">
 <h2>
 {{infobranch.Title}}
 </h2>
 <p>
-	{{infobranch.Description}}
+	{% autoescape off %}
+		{{infobranch.Description}}
+	{% endautoescape %}
+	
 </p>
-<div id="logo">
-	<img src="{{ MEDIA_URL }}{{infobranch.Logo}}" alt="">
-</div>
-<div id="social_links">
-	<a href="{{infobranch.facebook}}" title="">Facebook</a>
-	<a href="{{infobranch.gmail}}" title="">Gooble +</a>
-	<a href="{{infobranch.twitter}}" title="">Twitter</a>
-	<a href="{{infobranch.mail}}" title="">Mail</a>
-</div>
+	</div>
+	</div>
 <hr>
-{% autoescape off %}
-    {{infobranch.Video}}
-{% endautoescape %}
-
+<div class="row">
+	<div class="span8">
+		{% autoescape off %}
+		    {{infobranch.Video}}
+		{% endautoescape %}
+	</div>
+	<div class="span4">
 <div id="cupon">
  <img src="{{ MEDIA_URL }}{{infobranch.Coupon}}" alt="">	
 </div>
-
+	</div>
+</div>
 <hr>
-<ul id="scroller">
+<ul id="scroller" class="jcarousel jcarousel-skin-tango">
 	{% for img in galery %}
-		<li><img src="{{ MEDIA_URL }}{{img.Image}}" width="290" height="200" alt="{{img.Image_Title}}"  ></li>
-	{% empty %}		
+		{% thumbnail img.Image "210x155" crop="50% center" as im %}
+            <li><img class="logo_slide" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{img.Image_Title}}"></li>
+        {% empty %}
+        	<img src="{{ MEDIA_URL }}no_logo.jpg" alt="{{b.Title}}">
+        {% endthumbnail %}
 	{% endfor %}
 </ul> 
-
+</div>
 
 
 {% endblock %}
