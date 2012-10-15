@@ -5,6 +5,8 @@ from django.http import HttpResponseRedirect
 from django.http import Http404
 
 from nfc701010.apps.customers.models import ZipCode,Customer,Branch,PhotoGallery 
+from nfc701010.apps.customers.forms import formInfoPhone
+
 
 
 
@@ -22,7 +24,20 @@ def get_customer(request,customer,zipcode,branch):
 	except PhotoGallery.DoesNotExist:
 		mGalery = None
 	
-	ctx = {'infobranch':mBranch,'galery':mGalery}
+	""" Formulario para la peticion de numero de telefono """
+
+	if request.is_ajax():
+		mformPhone = formInfoPhone(request.POST)
+		if mformPhone.is_valid():
+			mfrmPhoneUncommited = mformPhone.save(commit=False)
+			mfrmPhoneUncommited.branch = mBranch
+			mfrmPhoneUncommited.save()
+			return "Save Phone"
+	else:
+		mformPhone = formInfoPhone()
+
+
+	ctx = {'infobranch':mBranch,'galery':mGalery,'frmPhone':mformPhone}
 	return render_to_response('customers/customer.html',ctx,context_instance=RequestContext(request))
 
 

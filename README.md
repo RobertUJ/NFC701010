@@ -8,3 +8,9 @@ ToDo
 
 -Add Feature Field in model Branch
 -Update view main for template print (With new models)
+
+Libraries
+
+imaging
+thumbnails
+django-phonenumber-field

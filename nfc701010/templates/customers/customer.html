@@ -1,11 +1,10 @@
 {% extends 'bases/template_base.html' %}
 {% block title %} 701010 :: CONNECT YOUR BUSINESS {% endblock %}
 
+{% block idbody %}id="{{infobranch.id_body}}"{% endblock idbody %}
+
 {% block content %}	
-
 {% load thumbnail %}
-
-
 <div class="container customer">
 	<div class="row">
 		<div class="span4">
@@ -15,8 +14,6 @@
         {% empty %}
         	<img src="{{ MEDIA_URL }}no_logo.jpg" alt="{{b.Title}}">
         {% endthumbnail %}
-		
-		
 		</div>
 		<div id="social_links">
 			<a href="{{infobranch.facebook}}" id="fb" class="social-iconos" title=""></a>
@@ -45,12 +42,34 @@
 		{% endautoescape %}
 	</div>
 	<div class="span4">
+
 <div id="cupon">
- <img src="{{ MEDIA_URL }}{{infobranch.Coupon}}" alt="">	
+<!-- <img src="{{ MEDIA_URL }}{{infobranch.Coupon}}" alt="">	 -->
+
+<div id="formPhone">
+	<form action="." method="POST" accept-charset="utf-8">
+		{% csrf_token %}
+			<input type="hidden" name="branch" value="{{infobranch.id}}" placeholder="">
+			<p>
+			<label for="">Insert your name:</label>
+			<input type="text" name="name" value="" placeholder="">
+			</p>
+			<p>
+			<label for="">Phone:</label>
+			<input type="text" name="phone" value="" placeholder="">
+			</p>
+			<input type="submit" id="btnPhone" name="" value="Submit">	
+	</form>
 </div>
-	</div>
+
+</div>
+
+
+</div>
 </div>
 <hr>
+
+{% if galery %}
 <ul id="scroller" class="jcarousel jcarousel-skin-tango">
 	{% for img in galery %}
 		{% thumbnail img.Image "210x155" crop="50% center" as im %}
@@ -60,7 +79,26 @@
         {% endthumbnail %}
 	{% endfor %}
 </ul> 
+{% endif %}
+
 </div>
-
-
 {% endblock %}
+
+{% block footer_extrajs %}
+	<script type="text/javascript" charset="utf-8" >
+		var id_branch = "{{infobranch.id}}";
+
+		$("#btnPhone").on("click",function(e){
+			e.preventDefault();
+
+
+
+		});
+
+
+		function get_cupon_ajax(id=""){
+			
+		}
+
+	</script>
+{% endblock footer_extrajs %}

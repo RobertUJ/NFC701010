@@ -24,7 +24,9 @@
         {% block header_extrajs %}{% endblock %}
     {% endblock %}
 </head>
-<body>
+
+<body {% block idbody %}{% endblock idbody %}>
+
 <div class="container">
 	<!-- Header -->   
         <header id="header" class="">

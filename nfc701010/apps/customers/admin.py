@@ -1,6 +1,6 @@
 from django.contrib.admin import *
 from django.contrib import admin
-from nfc701010.apps.customers.models import ZipCode,Customer,Branch,PhotoGallery
+from nfc701010.apps.customers.models import ZipCode,Customer,Branch,PhotoGallery,phone_info
 from sorl.thumbnail.admin import AdminImageMixin
 
 
@@ -21,7 +21,7 @@ class PhotoGalleryInline(AdminImageMixin, admin.StackedInline):
 class BranchAdmin(AdminImageMixin, admin.ModelAdmin):
 	inlines = [PhotoGalleryInline,]
 	prepopulated_fields = {"slug": ("name",)}
-	list_display        = ('name','Title','urltobranch',)
+	list_display        = ('name','Title','urltobranch','id_body')
 	list_filter         = ('ZipCode__zipcode','Customer__name',)
 	search_fields		= ('name','slug','Title','ZipCode__zipcode','Customer__name',)
 	
@@ -31,7 +31,11 @@ class BranchAdmin(AdminImageMixin, admin.ModelAdmin):
 	urltobranch.short_description = 'Url Shortcut'
 	urltobranch.allow_tags = True
 
+
+
+
 admin.site.register(ZipCode)
 # admin.site.register(PhotoGallery,PhotoGalleryAdmin)
 admin.site.register(Branch,BranchAdmin)
 admin.site.register(Customer,CustomerAdmin)
+admin.site.register(phone_info)

@@ -33,6 +33,9 @@ class Branch(models.Model):
 	twitter			= models.URLField(max_length=200,verify_exists=True,null=True,blank=True)
 	mail 			= models.EmailField(max_length=255,null=True,blank=True)
 	featured 		= models.BooleanField(default=False)
+	background_img  = models.ImageField(upload_to='branch/background',null=True,blank=True)
+	id_body			= models.CharField(max_length=20,null=True,blank=True)
+
 	def __unicode__(self):
 		return str(self.Title)
 	def save(self, *args, **kwargs):
@@ -46,8 +49,15 @@ class PhotoGallery(models.Model):
 	def __unicode__(self):
 		return str(self.Image_Title)
 
-
-
+class phone_info(models.Model):
+	branch 	= models.ForeignKey(Branch)
+	name 	= models.CharField(max_length=255)
+	phone 	= models.CharField(max_length=15)
+	class Meta:
+		verbose_name = ('Info Phone')
+		verbose_name_plural = ('Info Phones')
+	def __unicode__(self):
+		return "%s %s"%(self.name, self.phone)    
 
 
 
