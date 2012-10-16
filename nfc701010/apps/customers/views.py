@@ -3,6 +3,7 @@ from django.template import RequestContext
 from django.core.mail import EmailMultiAlternatives # Para enviar HTML
 from django.http import HttpResponseRedirect
 from django.http import Http404
+from django.http import HttpResponse
 
 from nfc701010.apps.customers.models import ZipCode,Customer,Branch,PhotoGallery 
 from nfc701010.apps.customers.forms import formInfoPhone
@@ -25,14 +26,18 @@ def get_customer(request,customer,zipcode,branch):
 		mGalery = None
 	
 	""" Formulario para la peticion de numero de telefono """
-
 	if request.is_ajax():
 		mformPhone = formInfoPhone(request.POST)
 		if mformPhone.is_valid():
 			mfrmPhoneUncommited = mformPhone.save(commit=False)
 			mfrmPhoneUncommited.branch = mBranch
 			mfrmPhoneUncommited.save()
-			return "Save Phone"
+			message = "true"
+			return HttpResponse(message)
+		else:
+			message = "fail"
+			return HttpResponse(message)
+
 	else:
 		mformPhone = formInfoPhone()
 

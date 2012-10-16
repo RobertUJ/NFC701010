@@ -44,22 +44,27 @@
 	<div class="span4">
 
 <div id="cupon">
-<!-- <img src="{{ MEDIA_URL }}{{infobranch.Coupon}}" alt="">	 -->
+<!-- 	 -->
 
 <div id="formPhone">
-	<form action="." method="POST" accept-charset="utf-8">
-		{% csrf_token %}
-			<input type="hidden" name="branch" value="{{infobranch.id}}" placeholder="">
-			<p>
-			<label for="">Insert your name:</label>
-			<input type="text" name="name" value="" placeholder="">
-			</p>
-			<p>
-			<label for="">Phone:</label>
-			<input type="text" name="phone" value="" placeholder="">
-			</p>
-			<input type="submit" id="btnPhone" name="" value="Submit">	
-	</form>
+	<div style="display:none;" id='cuponCont'>
+	<img src="{{ MEDIA_URL }}{{infobranch.Coupon}}" alt="">
+	</div>
+	<div id="frmCont">
+		<form action="." id="frmPhone" method="POST" accept-charset="utf-8">
+			{% csrf_token %}
+				<input type="hidden" id="idBranch" name="branch" value="{{infobranch.id}}" placeholder="">
+				<p>
+				<label for="">Insert your name:</label>
+				<input id="idName" type="text" name="name"  placeholder="">
+				</p>
+				<p>
+				<label for="">Phone:</label>
+				<input id="idPhone" type="text" name="phone" placeholder="">
+				</p>
+				<input type="submit" id="btnPhone" name="" value="Submit">	
+		</form>
+	</div>
 </div>
 
 </div>
@@ -85,20 +90,51 @@
 {% endblock %}
 
 {% block footer_extrajs %}
+
+<!-- estilos -->
+{% if infobranch.background_img %}
+	<style type="text/css">
+		body{
+			background:url({{ MEDIA_URL }}{{infobranch.background_img}}) repeat !important;
+		}
+	</style>
+{% endif %}
+
+
+
 	<script type="text/javascript" charset="utf-8" >
 		var id_branch = "{{infobranch.id}}";
 
 		$("#btnPhone").on("click",function(e){
 			e.preventDefault();
+			var _branch = $("#idBranch").val();
+			var _name  = $("#idName").val();
+			var _phone = $("#idPhone").val();
+			var _url   = "{{ request.get_full_path }}";
+			
+			_name = "Roberto Urita";
+			_phone = "8435474";
 
-
-
+				$.post(_url, { 
+					'branch':_branch,
+					'name': _name,
+					'phone': _phone,
+					'csrfmiddlewaretoken': '{{ csrf_token }}',
+				},
+					function(data) {
+						if (data != "fail"){
+								$("#frmCont").fadeOut();
+								$("#cuponCont").fadeIn();
+						}else{
+							alert("The name or phone are incorrect");
+						}
+						
+					}
+				);
 		});
 
 
-		function get_cupon_ajax(id=""){
-			
-		}
-
 	</script>
 {% endblock footer_extrajs %}
+
+
