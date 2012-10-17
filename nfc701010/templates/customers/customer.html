@@ -51,19 +51,29 @@
 	<img src="{{ MEDIA_URL }}{{infobranch.Coupon}}" alt="">
 	</div>
 	<div id="frmCont">
-		<form action="." id="frmPhone" method="POST" accept-charset="utf-8">
+		
+		<a id="btnCupon" href="#">
+			Get my cupon
+		</a>
+
+		<form style="display:none;" action="." id="frmPhone" method="POST" accept-charset="utf-8">
 			{% csrf_token %}
 				<input type="hidden" id="idBranch" name="branch" value="{{infobranch.id}}" placeholder="">
 				<p>
 				<label for="">Insert your name:</label>
-				<input id="idName" type="text" name="name"  placeholder="">
+				<input id="idName" type="text" name="name"  placeholder="eg: John Smith">
+				</p>
+				<p>
+				<label for="">Area:</label>
+				<input id="idArea" onkeypress='javascript:return soloNumeros(event)' type="tel" name="area" placeholder="Just numbers eg: 619">
 				</p>
 				<p>
 				<label for="">Phone:</label>
-				<input id="idPhone" type="text" name="phone" placeholder="">
+				<input id="idPhone" onkeypress='javascript:return soloNumeros(event)' type="tel" name="phone" placeholder="Just numbers eg: 2453254">
 				</p>
 				<input type="submit" id="btnPhone" name="" value="Submit">	
 		</form>
+
 	</div>
 </div>
 
@@ -100,8 +110,6 @@
 	</style>
 {% endif %}
 
-
-
 	<script type="text/javascript" charset="utf-8" >
 		var id_branch = "{{infobranch.id}}";
 
@@ -110,14 +118,31 @@
 			var _branch = $("#idBranch").val();
 			var _name  = $("#idName").val();
 			var _phone = $("#idPhone").val();
+			var _area = $("#idArea").val();
 			var _url   = "{{ request.get_full_path }}";
-			
-			_name = "Roberto Urita";
-			_phone = "8435474";
+
+			var mideName	= _name.length;
+			var midePhone 	= _phone.length;
+			var mideArea 	= _area.length; 
+
+			if(mideName >= 3){
+				
+			}else{
+				alert("Please enter a name with more than 3 letters");	return;
+			}
+
+			if(mideArea != 3){
+				alert("The area number can only be 3 digits");	return;
+			}
+
+			if( midePhone != 7 ){
+				alert("The phone number can only be 7 digits");	return;	
+			}
 
 				$.post(_url, { 
 					'branch':_branch,
 					'name': _name,
+					'area':_area,
 					'phone': _phone,
 					'csrfmiddlewaretoken': '{{ csrf_token }}',
 				},
@@ -126,12 +151,37 @@
 								$("#frmCont").fadeOut();
 								$("#cuponCont").fadeIn();
 						}else{
-							alert("The name or phone are incorrect");
+							alert("The name, area or phone are incorrect");
 						}
 						
 					}
 				);
 		});
+
+		$("#btnCupon").on("click",function(e){
+			e.preventDefault();
+			$(this).fadeOut('slow',function(){
+				$("#frmPhone").fadeIn('slow');
+			});
+			
+
+		});
+
+
+function soloNumeros(evt){
+	//asignamos el valor de la tecla a keynum
+	if(window.event){// IE
+		keynum = evt.keyCode;
+	}else{
+		keynum = evt.which;
+	}
+	//comprobamos si se encuentra en el rango
+	if(keynum>47 && keynum<58){
+		return true;
+	}else{
+		return false;
+	}
+}
 
 
 	</script>

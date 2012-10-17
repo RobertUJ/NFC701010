@@ -52,7 +52,8 @@ class PhotoGallery(models.Model):
 class phone_info(models.Model):
 	branch 	= models.ForeignKey(Branch)
 	name 	= models.CharField(max_length=255)
-	phone 	= models.CharField(max_length=15)
+	area 	= models.IntegerField(max_length=3)
+	phone 	= models.IntegerField(max_length=7)
 	class Meta:
 		verbose_name = ('Info Phone')
 		verbose_name_plural = ('Info Phones')

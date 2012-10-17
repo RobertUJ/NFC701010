@@ -5,6 +5,9 @@ import settings
 from django.contrib import admin
 admin.autodiscover()
 
+handler404 = 'nfc701010.apps.home.views.my_custom_404_view'
+
+
 urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'nfc701010.views.home', name='home'),

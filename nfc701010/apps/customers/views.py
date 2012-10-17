@@ -9,8 +9,6 @@ from nfc701010.apps.customers.models import ZipCode,Customer,Branch,PhotoGallery
 from nfc701010.apps.customers.forms import formInfoPhone
 
 
-
-
 def get_customer(request,customer,zipcode,branch):
 	_slug_customer = str(customer)
 	_zipcode  = int(zipcode)

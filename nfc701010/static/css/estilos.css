@@ -1,3 +1,7 @@
+/* @override http://192.168.0.117:1234/static/css/estilos.css */
+
+/* @override http://192.168.0.117:8000/static/css/estilos.css */
+
 /* @override http://192.168.0.117:8888/static/css/estilos.css */
 
 /* @override http://192.168.0.117:1234/static/css/estilos.css */
@@ -384,4 +388,52 @@ a.btn_link:hover{
     -o-transform: rotate(360deg);
     -ms-transform: rotate(360deg);
 }
+
+a#btnCupon {
+	background: url(../img/get-my-btn.png) no-repeat;
+	display: block;
+	width: 220px;
+	height: 47px;
+	overflow: hidden;
+	text-indent: 500px;
+	line-height: 500px;
+}
+
+form#frmPhone {
+	padding: 25px;
+	border: 1px solid #e3e3e3;
+	background-color: #f6f6f6;
+	width: 213px;
+}
+a#btnCupon:hover{
+	background-position: 0 -47px;
+}
+
+input#btnPhone {
+	display: block;
+	border: none;
+	width: 137px;
+	background: url(../img/submit-btn.png) no-repeat;
+	height: 47px;
+	overflow: hidden;
+	text-indent: 500px;
+	line-height: 500px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+input#btnPhone:hover{
+	background-position: 0 -47px;
+}
+
+div.span5.brujula {
+	padding-left: 90px;
+	margin-top: 60px;
+}
+div.span5.texto404 {
+	
+	margin-top: 60px;
+}
+
+
 

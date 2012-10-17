@@ -31,6 +31,10 @@ class BranchAdmin(AdminImageMixin, admin.ModelAdmin):
 	urltobranch.short_description = 'Url Shortcut'
 	urltobranch.allow_tags = True
 
+class phone_infoAdmin(admin.ModelAdmin):
+	list_display        = ('name','area','phone',)
+	search_fields		= ('name','area','phone',)
+	list_filter         = ('area','branch__name',)
 
 
 
@@ -38,4 +42,4 @@ admin.site.register(ZipCode)
 # admin.site.register(PhotoGallery,PhotoGalleryAdmin)
 admin.site.register(Branch,BranchAdmin)
 admin.site.register(Customer,CustomerAdmin)
-admin.site.register(phone_info)
+admin.site.register(phone_info,phone_infoAdmin)
