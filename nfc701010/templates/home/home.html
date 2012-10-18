@@ -36,7 +36,14 @@
 		<h3 id="featured_text">Featured Clients</h3>
 		</div>
 		{% load thumbnail %}
+
+
+		
 		{% for b in branchs %}
+			{% if forloop.first %}
+				<ul id="scroller" class="jcarousel jcarousel-skin-tango">
+			{% endif %}
+			<li>
 			<div class="span3">
 				<a href="/{{b.Customer.slug}}/{{b.ZipCode.zipcode}}/{{b.slug}}/">
 					<div class="cont_logo">
@@ -58,36 +65,18 @@
 				<p>
 					<a class="read_more" href="/{{b.Customer.slug}}/{{b.ZipCode.zipcode}}/{{b.slug}}/">Read More</a>
 				</p>
-			</div>			
+			</div>
+			</li>
+
+			{% if forloop.last %}
+				</ul>
+			{% endif %}
+
 		{% endfor %}
+
+
 	</div>
 <hr>
-	<div class="row">
-		<div class="span12">
-			<div class="pagination">
-				<span class="step-links">
-					{% if branchs.has_previous %}
-						<a class="prev_btn" href="?page={{ branchs.previous_page_number }}">Prev</a>
-					{% endif %}
-
-					{% for linkpage in branchs.paginator.page_range %}
-						{% ifequal linkpage branchs.number %}
-							<span class="current">{{ branchs.number }}</span>
-						{% else %}
-							<span class="page"><a href="?page={{ linkpage }}">{{ linkpage }}</a></span>
-						{% endifequal %}
-					{% endfor %}
-					
-					<span>
-						{# {{branchs.paginator}} #}
-					</span>
-					{% if branchs.has_next %}
-						<a class="next_btn" href="?page={{ branchs.next_page_number }}">Next</a>
-					{% endif %}
-				</span>
-			</div>	
-		</div>
-	</div>
 </div>
 	<div class="container">
 		<div class="row">
@@ -103,3 +92,18 @@
 	</div>
 	</div>
 {% endblock %}
+
+{% block footer_extrajs %}
+    <script src="{{ STATIC_URL }}js/jquery.carousel.min.js"></script>
+
+<script type="text/javascript">
+    
+    $(document).ready(function() {
+        $('#scroller').jcarousel();
+    });
+  
+</script>
+	
+{% endblock footer_extrajs %}
+
+
