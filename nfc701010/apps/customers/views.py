@@ -24,21 +24,20 @@ def get_customer(request,customer,zipcode,branch):
 		mGalery = None
 	
 	""" Formulario para la peticion de numero de telefono """
-	if request.is_ajax():
+	if request.method == "POST":
 		mformPhone = formInfoPhone(request.POST)
 		if mformPhone.is_valid():
 			mfrmPhoneUncommited = mformPhone.save(commit=False)
 			mfrmPhoneUncommited.branch = mBranch
 			mfrmPhoneUncommited.save()
-			message = "true"
-			return HttpResponse(message)
+
+			ctx = {'branch':mBranch,'last_url':request.get_full_path}
+			return render_to_response('customers/image_view.html',ctx,context_instance=RequestContext(request))
 		else:
-			message = "fail"
-			return HttpResponse(message)
+			mformPhone = formInfoPhone()
 
 	else:
 		mformPhone = formInfoPhone()
-
 
 	ctx = {'infobranch':mBranch,'galery':mGalery,'frmPhone':mformPhone}
 	return render_to_response('customers/customer.html',ctx,context_instance=RequestContext(request))

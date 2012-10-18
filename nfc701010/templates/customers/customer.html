@@ -57,20 +57,15 @@
 		</a>
 
 		<form style="display:none;" action="." id="frmPhone" method="POST" accept-charset="utf-8">
-			{% csrf_token %}
+				{% csrf_token %}
 				<input type="hidden" id="idBranch" name="branch" value="{{infobranch.id}}" placeholder="">
-				<p>
-				<label for="">Insert your name:</label>
-				<input id="idName" type="text" name="name"  placeholder="eg: John Smith">
-				</p>
-				<p>
-				<label for="">Area:</label>
-				<input id="idArea" onkeypress='javascript:return soloNumeros(event)' type="tel" name="area" placeholder="Just numbers eg: 619">
-				</p>
-				<p>
-				<label for="">Phone:</label>
-				<input id="idPhone" onkeypress='javascript:return soloNumeros(event)' type="tel" name="phone" placeholder="Just numbers eg: 2453254">
-				</p>
+				<label for="">ZIP Code:</label>
+				<input style="width:60%;text-align:center;" id="idZIPcode" type="tel" maxlength="5" onkeypress='javascript:return soloNumeros(event)' name="zipcode"  placeholder="eg: 32547">
+				<label for="">Area Code:</label>
+				<input style="width:30%;text-align:center;" id="idArea" maxlength="3" onkeypress='javascript:return soloNumeros(event)' type="tel" name="area" placeholder="eg: 619">
+				<label for="">Mobile Number:</label>
+				<input style="width:80%;text-align:center;" id="idMobile" maxlength="7" onkeypress='javascript:return soloNumeros(event)' type="tel" name="mobile" placeholder="eg: 2453254">
+				
 				<input type="submit" id="btnPhone" name="" value="Submit">	
 		</form>
 
@@ -105,7 +100,7 @@
 {% if infobranch.background_img %}
 	<style type="text/css">
 		body{
-			background:url({{ MEDIA_URL }}{{infobranch.background_img}}) repeat !important;
+			background:url({{ MEDIA_URL }}{{infobranch.background_img}}) no-repeat !important;
 		}
 	</style>
 {% endif %}
@@ -116,46 +111,31 @@
 		$("#btnPhone").on("click",function(e){
 			e.preventDefault();
 			var _branch = $("#idBranch").val();
-			var _name  = $("#idName").val();
-			var _phone = $("#idPhone").val();
+			var _zipcode  = $("#idZIPcode").val();
+			var _mobile = $("#idMobile").val();
 			var _area = $("#idArea").val();
-			var _url   = "{{ request.get_full_path }}";
+			var form   = $("#frmPhone");
 
-			var mideName	= _name.length;
-			var midePhone 	= _phone.length;
+			var midezipcode	= _zipcode.length;
+			var midemobile 	= _mobile.length;
 			var mideArea 	= _area.length; 
 
-			if(mideName >= 3){
+			if(midezipcode >= 5 || midezipcode == 0){
 				
 			}else{
-				alert("Please enter a name with more than 3 letters");	return;
+				alert("Please enter a zipcode valid");	return;
 			}
 
 			if(mideArea != 3){
 				alert("The area number can only be 3 digits");	return;
 			}
 
-			if( midePhone != 7 ){
-				alert("The phone number can only be 7 digits");	return;	
+			if( midemobile != 7 ){
+				alert("The mobile number can only be 7 digits");	return;	
 			}
 
-				$.post(_url, { 
-					'branch':_branch,
-					'name': _name,
-					'area':_area,
-					'phone': _phone,
-					'csrfmiddlewaretoken': '{{ csrf_token }}',
-				},
-					function(data) {
-						if (data != "fail"){
-								$("#frmCont").fadeOut();
-								$("#cuponCont").fadeIn();
-						}else{
-							alert("The name, area or phone are incorrect");
-						}
-						
-					}
-				);
+			form.submit();
+				
 		});
 
 		$("#btnCupon").on("click",function(e){

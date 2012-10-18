@@ -2,6 +2,7 @@ from django.contrib.admin import *
 from django.contrib import admin
 from nfc701010.apps.customers.models import ZipCode,Customer,Branch,PhotoGallery,phone_info
 from sorl.thumbnail.admin import AdminImageMixin
+from django.contrib.admin.filters import AllValuesFieldListFilter
 
 
 class CustomerAdmin(AdminImageMixin, admin.ModelAdmin):
@@ -21,10 +22,16 @@ class PhotoGalleryInline(AdminImageMixin, admin.StackedInline):
 class BranchAdmin(AdminImageMixin, admin.ModelAdmin):
 	inlines = [PhotoGalleryInline,]
 	prepopulated_fields = {"slug": ("name",)}
-	list_display        = ('name','Title','urltobranch','id_body')
-	list_filter         = ('ZipCode__zipcode','Customer__name',)
-	search_fields		= ('name','slug','Title','ZipCode__zipcode','Customer__name',)
+	list_display        = ('customer_name', 'name','Title','urltobranch','tag_id')
+	list_filter         = ('ZipCode__zipcode','Customer__name','tag_id',)
+	search_fields		= ('name','tag_id','slug','Title','ZipCode__zipcode','Customer__name',)
 	
+	def customer_name(self,instance):
+		return '%s' %(instance.Customer.name)
+	customer_name.short_description = "Customer Name"
+
+
+
 	def urltobranch(self,instance):
 		_url = '/%s/%s/%s/' % (instance.Customer.slug,instance.ZipCode.zipcode,instance.slug)
 		return 	'<a target="_blank" href="%s">%s</a>' % (_url,_url)
@@ -32,9 +39,9 @@ class BranchAdmin(AdminImageMixin, admin.ModelAdmin):
 	urltobranch.allow_tags = True
 
 class phone_infoAdmin(admin.ModelAdmin):
-	list_display        = ('name','area','phone',)
-	search_fields		= ('name','area','phone',)
-	list_filter         = ('area','branch__name',)
+	list_display        = ('zipcode','area','mobile',)
+	search_fields		= ('zipcode','area','mobile',)
+	list_filter         = ('zipcode','area','branch__Title')
 
 
 

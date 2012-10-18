@@ -18,6 +18,7 @@ class ZipCode(models.Model):
 		return str(self.zipcode)
 
 class Branch(models.Model):
+	tag_id 			= models.IntegerField(blank=False,unique=False,null=False)
 	Customer 		= models.ForeignKey(Customer)
 	ZipCode 		= models.ForeignKey(ZipCode)
 	name 			= models.CharField(max_length=255,null=False,blank=False,unique=True)
@@ -51,9 +52,9 @@ class PhotoGallery(models.Model):
 
 class phone_info(models.Model):
 	branch 	= models.ForeignKey(Branch)
-	name 	= models.CharField(max_length=255)
+	zipcode = models.IntegerField(max_length=5)
 	area 	= models.IntegerField(max_length=3)
-	phone 	= models.IntegerField(max_length=7)
+	mobile 	= models.IntegerField(max_length=7)
 	class Meta:
 		verbose_name = ('Info Phone')
 		verbose_name_plural = ('Info Phones')
