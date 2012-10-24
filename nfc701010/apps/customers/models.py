@@ -25,10 +25,10 @@ class Branch(models.Model):
 	slug 			= models.SlugField(max_length=255,null=True,blank=True,unique=True)
 	Title 			= models.CharField(max_length=255)
 	Logo  			= models.ImageField(upload_to='branch/logos')
-	Video			= models.TextField(help_text='After making your selection in youtube, copy and paste the embed code of the video selected.')
-	Coupon			= models.ImageField(upload_to='branch/cupon')
-	Description		= models.TextField()
-	Contact			= models.TextField()
+	Video			= models.TextField(help_text='After making your selection in youtube, copy and paste the embed code of the video selected.',blank=True,null=True)
+	Coupon			= models.ImageField(upload_to='branch/cupon',blank=True,null=True)
+	Description		= models.TextField(blank=True,null=True)
+	Contact			= models.TextField(blank=True,null=True)
 	facebook		= models.URLField(max_length=200,verify_exists=True,null=True,blank=True)
 	gmail			= models.URLField(max_length=200,verify_exists=True,null=True,blank=True)
 	twitter			= models.URLField(max_length=200,verify_exists=True,null=True,blank=True)
@@ -36,6 +36,17 @@ class Branch(models.Model):
 	featured 		= models.BooleanField(default=False)
 	background_img  = models.ImageField(upload_to='branch/background',null=True,blank=True)
 	id_body			= models.CharField(max_length=20,null=True,blank=True)
+	dir_1 			= models.CharField(max_length=255,null=True,blank=True)
+	dir_2 			= models.CharField(max_length=255,null=True,blank=True)
+	cd 	 			= models.CharField(max_length=255,null=True,blank=True)
+	state 			= models.CharField(max_length=255,null=True,blank=True)
+	zip_code		= models.CharField(max_length=255,null=True,blank=True)
+	latitude		= models.CharField(max_length=255,null=True,blank=True)
+	longitude		= models.CharField(max_length=255,null=True,blank=True)
+	
+
+
+
 
 	def __unicode__(self):
 		return str(self.Title)

@@ -33,12 +33,10 @@
 <div class="container">
 	<div class="row">
 		<div class="span12">
-		<h3 id="featured_text">Featured Clients</h3>
+			<h3 id="featured_text">Featured Clients</h3>
 		</div>
+		<div id="slide_home">
 		{% load thumbnail %}
-
-
-		
 		{% for b in branchs %}
 			{% if forloop.first %}
 				<ul id="scroller" class="jcarousel jcarousel-skin-tango">
@@ -47,7 +45,7 @@
 			<div class="span3">
 				<a href="/{{b.Customer.slug}}/{{b.ZipCode.zipcode}}/{{b.slug}}/">
 					<div class="cont_logo">
-						{% thumbnail b.Logo "210x155" crop="50% center" as im %}
+						{% thumbnail b.Logo "180x110" crop="50% center" as im %}
 				            <img class="Logo" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{b.Title}}">
 	                    {% empty %}
 	                    	<img src="{{ MEDIA_URL }}no_logo.jpg" alt="{{b.Title}}">
@@ -67,14 +65,12 @@
 				</p>
 			</div>
 			</li>
-
 			{% if forloop.last %}
 				</ul>
 			{% endif %}
-
 		{% endfor %}
 
-
+		</div>
 	</div>
 <hr>
 </div>

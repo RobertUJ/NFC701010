@@ -1,5 +1,9 @@
 /* @override http://192.168.0.117:1234/static/css/estilos.css */
 
+/* @override http://192.168.0.117:1234/static/css/estilos.css */
+
+/* @override http://192.168.0.117:1234/static/css/estilos.css */
+
 /* @override http://192.168.0.117:8000/static/css/estilos.css */
 
 /* @override http://192.168.0.117:8888/static/css/estilos.css */
@@ -250,6 +254,7 @@ h2 {
 	margin-top: 15px;
 }
 
+#slide_home .span3 p,
 p.description {
 	color: #737373;
 	font-size: 12px;
@@ -435,5 +440,45 @@ div.span5.texto404 {
 	margin-top: 60px;
 }
 
+#slide_home  ul#scroller.jcarousel.jcarousel-list.jcarousel-list-horizontal {
+	height: 271px;
+}
+
+#slide_home div.jcarousel-container.jcarousel-container-horizontal div.jcarousel-clip.jcarousel-clip-horizontal {
+	height: 271px;
+}
 
 
+
+#slide_home div.jcarousel-next.jcarousel-next-horizontal {
+	top: 40%;
+	width: 33px;
+	height: 46px;
+	background: url(../img/next-mini.png) no-repeat;
+}
+
+#slide_home div.jcarousel-prev.jcarousel-prev-horizontal {
+	top: 40%;
+	background: url(../img/back-mini.png) no-repeat;
+	width: 33px;
+	height: 46px;
+}
+
+#slide_home div.jcarousel-container.jcarousel-container-horizontal {
+	margin: 0 !important;
+	float: right;
+}
+
+
+
+#slide_home div.span3{
+	width: 180px!important;
+	margin: 0;
+}
+
+
+#slide_home .jcarousel li{
+	width: 180px!important;
+	margin-right: 10px;
+	margin-left: 10px;
+}

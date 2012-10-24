@@ -23,7 +23,7 @@ class BranchAdmin(AdminImageMixin, admin.ModelAdmin):
 	inlines = [PhotoGalleryInline,]
 	prepopulated_fields = {"slug": ("name",)}
 	list_display        = ('customer_name', 'name','Title','urltobranch','tag_id')
-	list_filter         = ('ZipCode__zipcode','Customer__name','tag_id',)
+	list_filter         = ('ZipCode__zipcode','Customer__name','tag_id','featured',)
 	search_fields		= ('name','tag_id','slug','Title','ZipCode__zipcode','Customer__name',)
 	
 	def customer_name(self,instance):
