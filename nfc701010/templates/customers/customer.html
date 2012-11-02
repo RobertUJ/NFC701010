@@ -41,11 +41,14 @@
 		    {{infobranch.Video}}
 		{% endautoescape %}
 	</div>
-	<div class="span4">
+
+{% if infobranch.Coupon %}	
+<div class="span4">
 
 <div id="cupon">
 <!-- 	 -->
 
+	
 <div id="formPhone">
 	<div style="display:none;" id='cuponCont'>
 	<img src="{{ MEDIA_URL }}{{infobranch.Coupon}}" alt="">
@@ -78,6 +81,7 @@
 
 
 </div>
+{% endif %}
 </div>
 <hr>
 
